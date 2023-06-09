@@ -1,8 +1,9 @@
-# web-based-expense-tracker
+### web-based-expense-tracker
 Web-based Expense Tracker: Develop a web application that allows users to track their expenses, set budgets, and generate reports for better financial management.
 
-#Features
-V-1.0.0
+## Features
+
+# V-1.0.0
 
   sign-up and sign-in
   
