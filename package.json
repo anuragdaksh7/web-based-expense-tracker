@@ -1,0 +1,22 @@
+{
+  "name": "web-based-expense-tracker",
+  "version": "1.0.0",
+  "description": "Web-based Expense Tracker: Web application that allows users to track their expenses, set budgets, and generate reports for better financial management.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anuragdaksh7/web-based-expense-tracker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anuragdaksh7/web-based-expense-tracker/issues"
+  },
+  "homepage": "https://github.com/anuragdaksh7/web-based-expense-tracker#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
