@@ -1,6 +1,8 @@
 const express = require("express");
 const fs = require('fs');
 
+USER = null
+
 const app = express();
 
 app.use(express.static('assets'));
