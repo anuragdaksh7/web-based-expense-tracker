@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/anuragdaksh7/web-based-expense-tracker#readme",
   "dependencies": {
+    "dependencies": "^0.0.1",
     "express": "^4.18.2"
-  }
+  },
+  "keywords": []
 }
