@@ -4,7 +4,7 @@ const fs = require('fs');
 USER = null
 
 const app = express();
-
+app.use(express.urlencoded());
 app.use(express.static('assets'));
 
 app.listen(3000, () => {
@@ -33,6 +33,11 @@ app.get("/login", (req, res) => {
         res.send(data);
     });
 });
+
+app.post("/login", (req, res) => {
+    res.send(req.body);
+});
+
 
 
 app.get("/signup", (req, res) => {
