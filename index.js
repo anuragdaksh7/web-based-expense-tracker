@@ -38,6 +38,10 @@ app.post("/login", (req, res) => {
     res.send(req.body);
 });
 
+app.post("/signup", (req, res) => {
+    res.send(req.body);
+});
+
 
 
 app.get("/signup", (req, res) => {
