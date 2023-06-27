@@ -1,7 +1,12 @@
 const express = require("express");
+const {addUser, authUser} = require("./database.js");
 const fs = require('fs');
+const { createHash } = require('crypto');
 
-USER = null
+function hash(string) {
+  return createHash('sha256').update(string).digest('hex');
+}
+var USER = null;
 
 const app = express();
 app.use(express.urlencoded());
@@ -34,11 +39,18 @@ app.get("/login", (req, res) => {
     });
 });
 
-app.post("/login", (req, res) => {
-    res.send(req.body);
+app.post("/login", async (req, res) => {
+    var a = await authUser( req.body.email, hash(req.body.password));
+    if (a != "Incorrect Creds.") 
+        USER = req.body.email;
+    res.send(a)
 });
 
-app.post("/signup", (req, res) => {
+app.post("/signup", async (req, res)  => {
+    var a = await addUser(req.body.email, req.body.username, hash(req.body.password));
+    console.log(a);
+    if (a == "USER CREATED")
+        USER = req.body.email;
     res.send(req.body);
 });
 
