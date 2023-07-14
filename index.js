@@ -1,5 +1,5 @@
 const express = require("express");
-const {addUser, authUser} = require("./database.js");
+const {addUser, authUser, getInfo} = require("./database.js");
 const fs = require('fs');
 const { createHash } = require('crypto');
 
@@ -41,16 +41,22 @@ app.get("/login", (req, res) => {
 
 app.post("/login", async (req, res) => {
     var a = await authUser( req.body.email, hash(req.body.password));
-    if (a != "Incorrect Creds.") 
+    if (a != "Incorrect Creds."){
         USER = req.body.email;
+        res.redirect("/home");
+        return;
+    }
     res.send(a)
 });
 
 app.post("/signup", async (req, res)  => {
     var a = await addUser(req.body.email, req.body.username, hash(req.body.password));
     console.log(a);
-    if (a == "USER CREATED")
+    if (a == "USER CREATED"){
         USER = req.body.email;
+        res.redirect("/home");
+        return;
+    }
     res.send(req.body);
 });
 
@@ -64,4 +70,24 @@ app.get("/signup", (req, res) => {
         }
         res.send(data);
     });
+});
+
+app.get("/home", async (req, res) => {
+    if (USER == null){
+        res.redirect("/");
+        return;
+    }
+    let response = await getInfo(USER);
+    fs.readFile('home.html', 'utf8',(err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        
+        // console.log(response);
+        data = data.replace("<%= name %>", response[0].user);
+        res.send(data);
+    });
+    // console.log(__dirname+"/home");
+    // res.render(__dirname+"\home",{name: response.user});
 });

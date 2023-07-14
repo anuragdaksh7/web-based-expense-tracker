@@ -13,6 +13,16 @@ const database = "expensive";
 //     let response = await collection.find({title:"Jackie Robinson"}).toArray();
 //     console.log(response[0].title, response.length);
 // }
+
+async function getInfo(email) {
+    let result = await client.connect();
+    let db = result.db(database);
+    let collection = db.collection("web-app");
+    let response = await collection.find({ email: email }).toArray();
+    return response;
+}
+
+
 async function addUser(Email, username, password){
     let result = await client.connect();
     let db = result.db(database);
@@ -32,4 +42,4 @@ async function authUser(Email, password){
     else return response[0].email;
 }
 
-module.exports = {addUser, authUser};
+module.exports = {addUser, authUser, getInfo};
