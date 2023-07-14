@@ -39,6 +39,17 @@ app.get("/login", (req, res) => {
     });
 });
 
+app.get("/test", (req, res) => {
+    fs.readFile("design.html","utf-8", (err, data) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.send(data);
+    })
+});
+
+
 app.post("/login", async (req, res) => {
     var a = await authUser( req.body.email, hash(req.body.password));
     if (a != "Incorrect Creds."){

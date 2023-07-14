@@ -4,15 +4,6 @@ const url = URL;
 
 const client = new MongoClient(url);
 const database = "expensive";
-// async function getData(){
-//     let result = await client.connect();
-//     let db = result.db(database);
-//     let collection = db.collection("web-app");
-//     // let response = await collection.find({"age":"18"}).toArray();
-//     await collection.insertOne({ title: 'Jackie Robinson' });
-//     let response = await collection.find({title:"Jackie Robinson"}).toArray();
-//     console.log(response[0].title, response.length);
-// }
 
 async function getInfo(email) {
     let result = await client.connect();
