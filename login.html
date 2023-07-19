@@ -1,53 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>BUDGETAID</title>
-        <link rel="icon" type="image/x-icon" href="/icon.png">
-        <style>
-            @font-face {
-                font-family: newFont;
-                src: url(/MontserratAlt1-Light.ttf);
-            }
-        </style>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUDGETAID</title>
+    <link rel="icon" type="image/x-icon" href="/icon.png">
+    <style>
+        @font-face {
+            font-family: newFont;
+            src: url(/MontserratAlt1-Light.ttf);
+        }
+    </style>
+    <link rel="stylesheet" href="/output.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;600&display=swap" rel="stylesheet">
-    </head>
+</head>
+
 <body class="bg-[#b6cfd9]">
     <div class="flex justify-center w-full h-full mt-16">
-            <div class="px-4 py-4 w-4/5 border-0 bg-[#f0f0f0]/[0.1] backdrop-filter backdrop-blur-sm shadow-[0_0px_26px_1px_rgba(0,0,0,0.3)] drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]
+        <div class="px-4 py-4 w-4/5 border-0 bg-[#f0f0f0]/[0.1] backdrop-filter backdrop-blur-sm shadow-[0_0px_26px_1px_rgba(0,0,0,0.3)] drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]
             rounded-xl  flex justify-center max-w-[800px]">
-                <!-- <p style="font-family: 'Noto Sans JP', sans-serif;"><b>こんにちわ</b></p> -->
-                
-                <div class=" md:flex md:justify-between">
-                    <!-- image here -->
-                    <div class="md:flex hidden  w-1/2">
-                        <img class="rounded-xl " src="/bg-3.png" alt="image">
-                    </div>
-                    
-                    <div class="w-full md:w-1/2 px-3">
-                        <h1 class="text-center font-['newFont'] text-4xl md:text-5xl mt-16 mr-2 ">BUDGETAID</h1>
-                        <p class="text-center text-xl font-bold mt-16 mb-8">Log In to your Account</p>
-                        <form action="/login" method="post">
-                            <input class="mb-6 bg-[#f0f0f0]
+            <!-- <p style="font-family: 'Noto Sans JP', sans-serif;"><b>こんにちわ</b></p> -->
+
+            <div class=" md:flex md:justify-between">
+                <!-- image here -->
+                <div class="md:flex hidden  w-1/2">
+                    <img class="rounded-xl " src="/bg-3.png" alt="image">
+                </div>
+
+                <div class="w-full md:w-1/2 px-3">
+                    <h1 class="text-center font-['newFont'] text-4xl md:text-5xl mt-16 mr-2 ">BUDGETAID</h1>
+                    <p class="text-center text-xl font-bold mt-16 mb-8">Log In to your Account</p>
+                    <form action="/login" method="post">
+                        <input class="mb-6 bg-[#f0f0f0]
                             h-8 border-0 outline-none pl-4 w-full rounded-md
                             " type="email" name="email" placeholder="Email..."><br>
-                            <input name="password" class="mb-6 bg-[#f0f0f0]
+                        <input name="password" class="mb-6 bg-[#f0f0f0]
                             h-8 border-0 outline-none pl-4 w-full rounded-md
                             " type="password" placeholder="Password..."><br>
-                            <button class="w-full bg-[#1c1c1d] text-[#f0f0f0] py-2
+                        <button class="w-full bg-[#1c1c1d] text-[#f0f0f0] py-2
                             rounded-lg">Log In</button>
-                        </form>
-                    </div>
-
-
+                    </form>
                 </div>
+
+
             </div>
         </div>
     </div>
+    </div>
 </body>
+
 </html>

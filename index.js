@@ -11,6 +11,7 @@ var USER = null;
 const app = express();
 app.use(express.urlencoded());
 app.use(express.static('assets'));
+app.use(express.static('dist'));
 
 app.listen(3000, () => {
   console.log("Application started and Listening on port 3000");
