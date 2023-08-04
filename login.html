@@ -17,6 +17,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;600&display=swap" rel="stylesheet">
+    <script>
+        function togglePasswordVisibility() {
+          var passwordInput = document.getElementById("password");
+          var showPasswordCheckbox = document.getElementById("showPassword");
+    
+          if (showPasswordCheckbox.checked) {
+            passwordInput.type = "text";
+          } else {
+            passwordInput.type = "password";
+          }
+        }
+      </script>
 </head>
 
 <body class="bg-[#b6cfd9]">
@@ -38,9 +50,11 @@
                         <input class="mb-6 bg-[#f0f0f0]
                             h-8 border-0 outline-none pl-4 w-full rounded-md 
                             " type="email" name="email" placeholder="Email..."><br>
-                        <input name="password" class="mb-6 bg-[#f0f0f0]
+                        <input name="password" id="password" class="mb-6 bg-[#f0f0f0]
                             h-8 border-0 outline-none pl-4 w-full rounded-md
                             " type="password" placeholder="Password..."><br>
+                            <input type="checkbox" id="showPassword" onchange="togglePasswordVisibility()">
+                            <label for="showPassword">Show Password</label>
                         <button class="w-full bg-[#1c1c1d] text-[#f0f0f0] py-2
                             rounded-lg">Log In</button>
                     </form>
