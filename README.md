@@ -8,6 +8,12 @@ Web-based Expense Tracker: Develop a web application that allows users to track 
 - cd web-based-expense-tracker
 - npm i
 - npm run dev
+- go to http://localhost:3000
+
+## For Docker
+- docker build -t myapp
+- docker run -d -p myapp
+- go to http://localhost:3000
 
 ## Features
 
