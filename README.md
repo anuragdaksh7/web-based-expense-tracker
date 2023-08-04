@@ -3,6 +3,12 @@ Web-based Expense Tracker: Develop a web application that allows users to track 
 
 ## [DEPLOYMENT](https://expense-tracker-zrcx.onrender.com/)
 
+## Steps to install
+- git clone https://github.com/anuragdaksh7/web-based-expense-tracker.git
+- cd web-based-expense-tracker
+- npm i
+- npm run dev
+
 ## Features
 
 ### V-1.0.0
