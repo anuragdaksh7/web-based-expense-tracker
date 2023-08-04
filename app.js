@@ -1,8 +1,9 @@
+require('dotenv').config();
 const express = require("express");
 const app = express();
 const { createHash } = require('crypto');
 const fs = require('fs');
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 const db = require("./db.js");
 const Register = require("./register.js");
 
@@ -63,6 +64,8 @@ app.post("/signup", async (req, res) =>{
             password: hash(req.body.password),
         });
 
+        const token = await register.generateAuthToken();
+
         const registered = await register.save();
         res.status(201).redirect("/home");
 
@@ -81,6 +84,8 @@ app.post("/login", async(req, res) => {
         const password = hash(req.body.password);
 
         const userEmail = await Register.findOne({email: email});
+        const token = await userEmail.generateAuthToken();
+        console.log("token: "+ token);
         if (userEmail.password === password){
             res.status(201).redirect("/home");
         } else {
@@ -101,4 +106,9 @@ app.get("/home", (req,res) => {
         }
         res.send(data);
     });
+});
+
+
+app.get("/health-check-001", (req, res) => {
+    res.status(200);
 });
