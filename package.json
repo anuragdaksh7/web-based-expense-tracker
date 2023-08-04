@@ -4,7 +4,8 @@
   "description": "Web-based Expense Tracker: Web application that allows users to track their expenses, set budgets, and generate reports for better financial management.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
