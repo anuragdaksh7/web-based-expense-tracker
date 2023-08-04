@@ -1,5 +1,6 @@
+require("dotenv").config();
 const {MongoClient} = require("mongodb");
-const URL = require('./key.js');
+const URL = process.env.API_KEY;
 const url = URL;
 
 const client = new MongoClient(url);

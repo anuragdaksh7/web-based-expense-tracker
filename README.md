@@ -38,4 +38,4 @@ Web-based Expense Tracker: Develop a web application that allows users to track 
 
 ### V-1.1.2
 
-  To be thought later...
+  To be thought later
