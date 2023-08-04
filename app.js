@@ -4,7 +4,6 @@ const app = express();
 const { createHash } = require('crypto');
 const fs = require('fs');
 const PORT = 3000;
-const db = require("./db.js");
 const Register = require("./register.js");
 const cookieParser = require("cookie-parser");
 const auth = require("./auth.js");
