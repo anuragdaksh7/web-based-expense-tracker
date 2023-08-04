@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Categories</title>
+</head>
+<body>
+    <h1>Categories</h1>
+    <div id="categoryList">
+        <!-- Categories will be added here dynamically -->
+    </div>
+    <button onclick="addCategory()">Add Category</button>
+
+    <script>
+        function addCategory() {
+            const categoryName = prompt("Enter the category name:");
+            if (categoryName) {
+                const categoryDiv = document.createElement("div");
+                categoryDiv.textContent = categoryName;
+
+                // Create a "Remove" button for each category
+                const removeButton = document.createElement("button");
+                removeButton.textContent = "Remove";
+                removeButton.onclick = function () {
+                    categoryDiv.remove(); // Remove the category div when the "Remove" button is clicked
+                };
+
+                // Style the category div (optional)
+                categoryDiv.style.backgroundColor = "#f9f9f9";
+                categoryDiv.style.border = "1px solid #ccc";
+                categoryDiv.style.padding = "10px";
+                categoryDiv.style.marginBottom = "20px";
+
+                // Add the "Remove" button to the category div
+                categoryDiv.appendChild(removeButton);
+
+                // Add the category div to the categoryList container
+                const categoryList = document.getElementById("categoryList");
+                categoryList.appendChild(categoryDiv);
+            }
+        }
+    </script>
+</body>
+</html>

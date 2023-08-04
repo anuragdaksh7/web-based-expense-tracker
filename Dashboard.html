@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BUDGETAID</title>
+    <!-- Add your CSS and JavaScript links here -->
+    <style>
+        /* User Input Code CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .manage-categories-btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .manage-categories-btn:hover {
+            background-color: #0056b3;
+        }
+        /* Style for "Enter New Expense" button */
+        .new-expense-btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .new-expense-btn:hover {
+            background-color: #007bff;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        h2 {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        .summary {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .trends {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            /* Adjust the height and width to resize the area graph */
+            height: 300px;
+            width: 400px;
+        }
+
+        .categories {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            /* Adjust the height and width to resize the pie chart */
+            height: 300px;
+            width: 400px;
+        }
+
+        .budget {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .transactions {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Progress Bar */
+        .progress-bar-container {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            height: 30px;
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>BUDGETAID</h1>
+        <!-- Add navigation links if required -->
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Dashboard Section -->
+        <section id="dashboard">
+            <!-- Overview Summary -->
+            <div class="summary">
+                <h2>Monthly Expenses Overview</h2>
+                <p>Total Spending: <span id="totalSpending">$0.00</span></p>
+                <p>Average Spending: <span id="averageSpending">$0.00</span></p>
+                <div class="budget">
+                    <h2>Budget Progress</h2>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar" style="width: 0;"></div>
+                    </div>
+                    <p>Budget Limit: $500.00</p>
+                </div>
+            </div>
+            <!-- Recent Transactions -->
+            <div class="transactions">
+                <h2>Recent Transactions</h2>
+                <table id="expenseTable">
+                    <tr>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                    </tr>
+                    <!-- Add expense data here -->
+                    <tr>
+                        <td>2023-08-01</td>
+                        <td>$100.50</td>
+                        <td>Groceries</td>
+                    </tr>
+                    <tr>
+                        <td>2023-08-03</td>
+                        <td>$50.25</td>
+                        <td>Transportation</td>
+                    </tr>
+                    <tr>
+                        <td>2023-08-05</td>
+                        <td>$75.75</td>
+                        <td>Entertainment</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <!-- Monthly Trends -->
+        <div class="trends">
+            <h2>Monthly Expense Trends</h2>
+            <canvas id="lineChart"></canvas>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <!-- line graph or area chart here to show monthly spending trends -->
+        </div>
+        <!-- Expense Categories -->
+        <div class="categories">
+            <h2>Expense Categories</h2>
+            <canvas id="pieChart"></canvas>
+            <!-- pie chart to represent expense categories -->
+        </div>
+        <div class="createcategories">
+            <h2><button class="manage-categories-btn" onclick="openExpenseCategoriesPage()">Manage Expense Categories</button></h2>
+        </div>
+        <!-- Expense Entry Form Section -->
+        <section id="expense-entry">
+            <h2><button class="new-expense-btn" onclick="openNewExpensePage()">Enter New Expense</button></h2>
+            <!-- Add a form with fields for date, amount, category, and notes -->
+        </section>
+
+        <!-- Expense Reports Section -->
+        <section id="expense-reports">
+            <h2>Expense Reports</h2>
+            <!-- Add options for generating and displaying expense reports -->
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <!-- Add footer content and links here -->
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Example expense data
+        const expenseData = [
+            { date: '2023-08-01', amount: 100.50, category: 'Groceries' },
+            { date: '2023-08-03', amount: 50.25, category: 'Transportation' },
+            { date: '2023-08-05', amount: 75.75, category: 'Entertainment' },
+            // Add more expense data here
+        ];
+
+        // Example budget amount
+        const budgetAmount = 500;
+
+        // Function to display recent expenses in the table
+        function displayRecentExpenses() {
+            const expenseTable = document.getElementById('expenseTable');
+
+            // Clear the table first
+            expenseTable.innerHTML = `
+                <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                </tr>
+            `;
+
+            // Add each expense to the table
+            expenseData.forEach(expense => {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${expense.date}</td>
+                    <td>$${expense.amount.toFixed(2)}</td>
+                    <td>${expense.category}</td>
+                `;
+                expenseTable.appendChild(newRow);
+            });
+        }
+
+        // Function to open the "Manage Expense Categories" page in a new tab
+        function openExpenseCategoriesPage() {
+            window.open("ExpenseCategories.html", "_blank");
+        }
+
+        // Function to open new expense page in a new tab
+        function openNewExpensePage() {
+            window.open("newexpense.html", "_blank");
+        }
+
+        // Calculate total spending
+        const totalSpending = expenseData.reduce((acc, expense) => acc + expense.amount, 0);
+        document.getElementById("totalSpending").textContent = `$${totalSpending.toFixed(2)}`;
+
+        // Calculate average spending
+        const averageSpending = totalSpending / expenseData.length;
+        document.getElementById("averageSpending").textContent = `$${averageSpending.toFixed(2)}`;
+
+        // Calculate progress towards budget
+        const progress = (totalSpending / budgetAmount) * 100;
+        const progressBar = document.getElementById("progressBar");
+        progressBar.style.width = `${progress}%`;
+
+        // Call the function to display recent expenses on page load
+        displayRecentExpenses();
+
+        // Example expense categories data (replace this with your actual data)
+        const expenseCategoriesData = [
+            { category: 'Groceries', amount: 300 },
+            { category: 'Transportation', amount: 150 },
+            { category: 'Entertainment', amount: 100 },
+            { category: 'Health', amount: 75 },
+            // Add more expense categories data here
+        ];
+
+        // Function to display pie chart for expense categories
+        function displayExpenseCategoriesChart() {
+            const labels = expenseCategoriesData.map(item => item.category);
+            const data = expenseCategoriesData.map(item => item.amount);
+
+            const ctx = document.getElementById('pieChart').getContext('2d');
+            const pieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            '#007bff',
+                            '#28a745',
+                            '#dc3545',
+                            '#ffc107',
+                            // Add more colors for each category here
+                        ],
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'right',
+                        }
+                    }
+                }
+            });
+        }
+
+        // Call the function to display the pie chart on page load
+        displayExpenseCategoriesChart();
+
+        // Example monthly spending data (replace this with your actual data)
+        const monthlySpendingData = [
+            { month: 'January', amount: 300 },
+            { month: 'February', amount: 400 },
+            { month: 'March', amount: 200 },
+            { month: 'April', amount: 250 },
+            { month: 'May', amount: 350 },
+            { month: 'June', amount: 500 },
+            // Add more monthly spending data here
+        ];
+
+        // Function to display line graph for monthly spending trends
+        function displayMonthlySpendingTrends() {
+            const labels = monthlySpendingData.map(item => item.month);
+            const data = monthlySpendingData.map(item => item.amount);
+
+            const ctx = document.getElementById('lineChart').getContext('2d');
+            const lineChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Monthly Spending Trends',
+                        borderColor: '#007bff',
+                        backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                        data: data,
+                        borderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        fill: true,
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+        }
+
+        // Call the function to display the line graph on page load
+        displayMonthlySpendingTrends();
+    </script>
+</body>
+</html>

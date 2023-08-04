@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BUDGETAID</title>
+    <style>
+        /* Your existing CSS styles here */
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BUDGETAID</h1>
+    </header>
+
+    <main>
+        <!-- Dashboard Section -->
+        <section id="dashboard">
+            <!-- Your existing dashboard content here -->
+        </section>
+
+        <!-- Expense Entry Form Section -->
+        <section id="expense-entry">
+            <h2>Enter New Expense</h2>
+            <form action="/submit_expense" method="post">
+                <div>
+                    <label for="expense-date">Date:</label>
+                    <input type="date" id="expense-date" name="expense_date" required>
+                </div>
+
+                <div>
+                    <label for="expense-amount">Amount:</label>
+                    <input type="number" id="expense-amount" name="expense_amount" step="0.01" required>
+                </div>
+
+                <div>
+                    <label for="expense-category">Category:</label>
+                    <select id="expense-category" name="expense_category" required>
+                        <option value="">Select a category</option>
+                        <option value="groceries">Groceries</option>
+                        <option value="utilities">Utilities</option>
+                        <option value="transportation">Transportation</option>
+                        <!-- Add more options for other categories as needed -->
+                    </select>
+                </div>
+
+                <div>
+                    <label for="expense-notes">Notes:</label>
+                    <textarea id="expense-notes" name="expense_notes" rows="4" cols="50"></textarea>
+                </div>
+
+                <div>
+                    <button type="submit">Submit Expense</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
