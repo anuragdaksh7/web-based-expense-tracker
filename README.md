@@ -7,29 +7,29 @@ Web-based Expense Tracker: Develop a web application that allows users to track 
 
 ### V-1.0.0
 
-  sign-up and sign-in
+  Sign-up and sign-in
   
-  can add new expense
+  Can add new expense
   
-  catogrise the expense according to the expense
+  Catogrise the expense according to the type
   
-  delete the expense 
+  Delete the expense 
   
-  mordify the expense
+  Modify the expense
   
 
 ### V-1.0.1
 
-  view virtual representation of the expenses by some graphs (like pie chart)
+  View virtual representation of the expenses via graphs (like pie chart)
   
-  multiple currency support
+  Support for multiple currencies
 
 ### V-1.1.1
 
-  make virtual passbook in form of a PDF
+  Make virtual passbook in form of a PDF
   
-  make excel sheet from monthly data
+  Make excel sheet from monthly data
 
 ### V-1.1.2
 
-  #to be thought later
+  To be thought later...
