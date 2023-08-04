@@ -6,8 +6,11 @@ const fs = require('fs');
 const PORT = process.env.PORT;
 const db = require("./db.js");
 const Register = require("./register.js");
+const cookieParser = require("cookie-parser");
+const auth = require("./auth.js");
 
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(express.static('assets'));
@@ -65,6 +68,14 @@ app.post("/signup", async (req, res) =>{
         });
 
         const token = await register.generateAuthToken();
+        res.cookie(
+            "jwt",
+            token, 
+            {
+                expires: new Date(Date.now()+30000),
+                httpOnly: true
+            }
+        );
 
         const registered = await register.save();
         res.status(201).redirect("/home");
@@ -86,6 +97,17 @@ app.post("/login", async(req, res) => {
         const userEmail = await Register.findOne({email: email});
         const token = await userEmail.generateAuthToken();
         console.log("token: "+ token);
+
+        res.cookie(
+            "jwt",
+            token, 
+            {
+                // expires: new Date(Date.now()+30000),
+                httpOnly: true,
+                // secure: true
+            }
+        );
+        // console.log(`cookie: ${req.cookies.jwt}`);
         if (userEmail.password === password){
             res.status(201).redirect("/home");
         } else {
@@ -97,8 +119,11 @@ app.post("/login", async(req, res) => {
     }
 });
 
+app.get("/secret", auth , (req, res)=>{
+    res.send("saasda");
+});
 
-app.get("/home", (req,res) => {
+app.get("/home", auth ,(req,res) => {
     fs.readFile('home.html', 'utf8', (err, data) => {
         if (err) {
             console.error(err);
@@ -108,6 +133,16 @@ app.get("/home", (req,res) => {
     });
 });
 
+app.get("/logout", auth, async (req, res) => {
+    try {
+        res.clearCookie("jwt");
+        console.log("logged Out");
+        await req.user.save();
+        res.redirect("/login");
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
 
 app.get("/health-check-001", (req, res) => {
     res.status(200);
