@@ -19,7 +19,7 @@ Web-based Expense Tracker: Develop a web application that allows users to track 
 
 ### V-1.0.0
 
-  Sign-up and sign-in
+  Sign-up and sign-in ✔️
   
   Can add new expense
   
