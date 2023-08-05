@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUDGETAID</title>
+    <title>Dashboard</title>
     <link rel="icon" type="image/x-icon" href="/icon.png">
     <style>
         @font-face {
@@ -13,16 +13,295 @@
             src: url(/MontserratAlt1-Light.ttf);
         }
     </style>
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/output.css">
+    <!-- <link rel="stylesheet" href="/output.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 </head>
 
-<body class="bg-[#438fab] mb-2">
-    <h1>hello</h1>
+<body class=" bg-white">
+    
+    <div class="bg-[#03a9fc]/[0.5] rounded-b-lg">
+        <h1 class="rounded-b-lg font-['newFont'] text-5xl py-4 border-b-2  border-black">BUDGETAID</h1>
+    </div>
+    <div class=" display-flex justify-center">
+        <div class="m-4 p-4 ">
+            <div class="shadow-[0_0_30px_-5px_rgba(0,0,0,0.3)] border-0 rounded-lg border-black bg-cyan-300/[0.30]">
+                <h1 class="text-3xl pt-4 border-black font-semibold p-1 border-b-2 mx-2">Monthly Expenses Overview</h1>
+
+                <div class="mt-1 p-2">
+                    <p class="text-lg">Total Spending: <span name="totalSpending">$123</span></p>
+                    <p class="text-lg">Average Spending: <span name="avgSpending">$23</span></p>
+                    <div class=" border-0 shadow-[0_0_30px_-5px_rgba(0,0,0,0.3)] bg-cyan-300/[0.20]  rounded-lg width-1/2 border-black p-2 mt-2">
+                        <h1 class="text-xl font-semibold mb-2">Budget Progress</h1>
+                        <!-- <progress class="" value="123" max="345">212%</progress> -->
+                        <div class="mb-2 w-1/2 bg-gray-200 rounded-sm h-3.5 dark:bg-gray-700">
+                            <div class="bg-blue-600 h-3.5 rounded-sm" style="width: 45%"></div>
+                        </div>
+                        <p class="text-left text-xs">*Budget Limit: $345.00</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="m-4 p-4 display-flex justify-center">
+        <div class="px-4 pb-2 shadow-[0_0_30px_-5px_rgba(0,0,0,0.3)] border-0 rounded-lg border-black bg-cyan-300/[0.30]">
+            <h1 class="text-lg pt-4 border-black font-semibold p-1 mx-2">Recent Transactions</h1>
+            <table class="shadow-sm font-[Poppins] border-1 border-cyan-200 w-full mb-4" id="expenseTable">
+                <thead class="text-white">
+                    <tr class=" rounded-t-lg">
+                        <th class="py-2 bg-cyan-700/[0.70]">Date</th>
+                        <th class="py-2 bg-cyan-700/[0.70]">Amount</th>
+                        <th class="py-2 bg-cyan-700/[0.70]">Category</th>
+                    </tr>
+                </thead>
+                <tbody class="text-cyan-900 text-center">
+                    <tr class="bg-cyan-200/[0.70] hover:bg-cyan-100 hover:scale-105 cursor-pointer duration-300">
+                        <td class="py-2 px-1">2023-08-01</td>
+                        <td class="py-2 px-1">$100.50</td>
+                        <td class="py-2 px-1">A</td>
+                    </tr>
+                    <tr class="bg-cyan-300/[0.70] hover:bg-cyan-100 hover:scale-105 cursor-pointer duration-300">
+                        <td class="py-2 px-1">2023-08-01</td>
+                        <td class="py-2 px-1">$100.50</td>
+                        <td class="py-2 px-1">B</td>
+                    </tr>
+                    <tr class="bg-cyan-400/[0.70] hover:bg-cyan-100 hover:scale-105 cursor-pointer duration-300">
+                        <td class="py-2 px-1">2023-08-01</td>
+                        <td class="py-2 px-1">$100.50</td>
+                        <td class="py-2 px-1">C</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="m-4 p-4 block sm:flex justify-around">
+        <div class="w-full  sm:w-2/4 trends p-4 shadow-[0_0_30px_-5px_rgba(0,0,0,0.3)] border-0 rounded-lg border-black bg-cyan-300/[0.30] mb-4">
+            <h2 class="text-lg pt-4 border-black font-semibold p-1 mx-2">Monthly Expense Trends</h2>
+            <canvas class="mt-2 bg-gray-100 rounded-lg" id="lineChart"></canvas>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <!-- line graph or area chart here to show monthly spending trends -->
+        </div>
+        <div class="mt-4 sm:mt-0 w-full sm:w-1/3 categories p-4 shadow-[0_0_30px_-5px_rgba(0,0,0,0.3)] border-0 rounded-lg border-black bg-cyan-300/[0.30]">
+            <h2 class="text-lg pt-4 border-black font-semibold p-1 mx-2">Expense Categories</h2>
+            <canvas id="pieChart"></canvas>
+            <!-- pie chart to represent expense categories -->
+        </div>
+    </div>
+    <div class="block sm:flex sm:justify-around mb-2">
+        <div class="createcategories flex sm:block justify-center">
+            <h2><button class="m-2 manage-categories-btn bg-[#007bff] py-2 px-2 rounded-md hover:bg-[#007bff]/[0.40] duration-300 text-white" onclick="openExpenseCategoriesPage()">Manage Expense Categories</button></h2>
+        </div>
+        <!-- Expense Entry Form Section -->
+        <section id="expense-entry" class=" flex sm:block justify-center">
+            <h2><button class="m-2 new-expense-btn  bg-[#007bff] py-2 px-2 rounded-md hover:bg-[#007bff]/[0.40] duration-300 text-white" onclick="openNewExpensePage()">Enter New Expense</button></h2>
+            <!-- Add a form with fields for date, amount, category, and notes -->
+        </section>
+
+        <!-- Expense Reports Section -->
+        <!-- <section id="expense-reports" class=" flex sm:block justify-center"> -->
+            <!-- <h2>Expense Reports</h2> -->
+            <!-- Add options for generating and displaying expense reports -->
+        <!-- </section> -->
+    </div>
+    <script>
+        // Example expense data
+        const expenseData = [
+            { date: '2023-08-01', amount: 100.50, category: 'Groceries' },
+            { date: '2023-08-03', amount: 50.25, category: 'Transportation' },
+            { date: '2023-08-05', amount: 75.75, category: 'Entertainment' },
+            // Add more expense data here
+        ];
+
+        // Example budget amount
+        const budgetAmount = 500;
+
+        // Function to display recent expenses in the table
+        function displayRecentExpenses() {
+            const expenseTable = document.getElementById('expenseTable');
+
+            // Clear the table first
+            expenseTable.innerHTML = `
+                <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                </tr>
+            `;
+
+            // Add each expense to the table
+            expenseData.forEach(expense => {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${expense.date}</td>
+                    <td>$${expense.amount.toFixed(2)}</td>
+                    <td>${expense.category}</td>
+                `;
+                expenseTable.appendChild(newRow);
+            });
+        }
+
+        // Function to open the "Manage Expense Categories" page in a new tab
+        function openExpenseCategoriesPage() {
+            window.open("ExpenseCategories.html", "_blank");
+        }
+
+        // Function to open new expense page in a new tab
+        function openNewExpensePage() {
+            window.open("newexpense.html", "_blank");
+        }
+
+        // Calculate total spending
+        const totalSpending = expenseData.reduce((acc, expense) => acc + expense.amount, 0);
+        document.getElementsByName("totalSpending")[0].textContent = `$${totalSpending.toFixed(2)}`;
+
+        // Calculate average spending
+        const averageSpending = totalSpending / expenseData.length;
+        document.getElementsByName("avgSpending")[0].textContent = `$${averageSpending.toFixed(2)}`;
+
+        // Calculate progress towards budget
+        const progress = (totalSpending / budgetAmount) * 100;
+        const progressBar = document.getElementById("progressBar");
+        // progressBar.style.width = `${progress}%`;
+
+        // Call the function to display recent expenses on page load
+        // displayRecentExpenses();
+
+        // Example expense categories data (replace this with your actual data)
+        const expenseCategoriesData = [
+            { category: 'Groceries', amount: 300 },
+            { category: 'Transportation', amount: 150 },
+            { category: 'Entertainment', amount: 100 },
+            { category: 'Health', amount: 75 },
+            // Add more expense categories data here
+        ];
+
+        // Function to display pie chart for expense categories
+        function displayExpenseCategoriesChart() {
+            const labels = expenseCategoriesData.map(item => item.category);
+            const data = expenseCategoriesData.map(item => item.amount);
+
+            const ctx = document.getElementById('pieChart').getContext('2d');
+            const pieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            '#007bff',
+                            '#28a745',
+                            '#dc3545',
+                            '#ffc107',
+                            // Add more colors for each category here
+                        ],
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'right',
+                        }
+                    }
+                }
+            });
+        }
+
+        // Call the function to display the pie chart on page load
+        displayExpenseCategoriesChart();
+
+        // Example monthly spending data (replace this with your actual data)
+        const monthlySpendingData = [
+            { month: 'January', amount: 300 },
+            { month: 'February', amount: 400 },
+            { month: 'March', amount: 200 },
+            { month: 'April', amount: 250 },
+            { month: 'May', amount: 350 },
+            { month: 'June', amount: 500 },
+            // Add more monthly spending data here
+        ];
+
+        // Function to display line graph for monthly spending trends
+        function displayMonthlySpendingTrends() {
+            const labels = monthlySpendingData.map(item => item.month);
+            const data = monthlySpendingData.map(item => item.amount);
+
+            const ctx = document.getElementById('lineChart').getContext('2d');
+            const lineChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Monthly Spending Trends',
+                        borderColor: '#007bff',
+                        // backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                        backgroundColor: 'rgba(255,255,255,0.1)',
+                        data: data,
+                        borderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        fill: true,
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+        }
+
+        // Call the function to display the line graph on page load
+        displayMonthlySpendingTrends();
+    </script>
+
+    <footer class="pt-4 bg-[#004d6b] border-t-2 mb-0 text-white">
+        <div class=" pt-4 ">
+            <div class="">
+                <div class="block sm:flex justify-around">
+                    <div class="flex justify-center" >
+                        <img src="/icon.png" width="100px">
+                    </div>
+                    <nav >
+                        <ul class="mt-0 sm:mt-[25px] flex justify-around">                        
+                            <li class="p-2"><a href=#>Home</a></li>
+                            <li class="p-2"><a href=#>About</a></li>
+                            <li class="p-2"><a href=#>Contact</a></li>
+                            <li class="p-2"><a href=#>Privacy Policy</a></li>
+                        </ul>
+                    </nav>
+                    <div>
+                            <p class="text-center p-2">Contact Us:</p>
+                            <p class="text-center p-2">Email: anuragdaksh77777@gmail.com</p>
+                    </div>
+                    <div class="mt-0 sm:mt-[25px] flex justify-around">
+                        <a class="p-2" href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a class="p-2" href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a class="p-2" href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a class="p-2" href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="mb-0 flex justify-center text-white p-2">
+                    <p>&copy; 2023 Expense Tracker. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+
 </body>
 
 </html>
