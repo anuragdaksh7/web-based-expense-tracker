@@ -18,10 +18,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;600&display=swap" rel="stylesheet">
     <!-- <link rel="stylesheet" href="/output.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 </head>
 
-<body class=" bg-white mb-2">
+<body class=" bg-white">
     
     <div class="bg-[#03a9fc]/[0.5] rounded-b-lg">
         <h1 class="rounded-b-lg font-['newFont'] text-5xl py-4 border-b-2  border-black">BUDGETAID</h1>
@@ -91,7 +92,7 @@
             <!-- pie chart to represent expense categories -->
         </div>
     </div>
-    <div class="block sm:flex sm:justify-around">
+    <div class="block sm:flex sm:justify-around mb-2">
         <div class="createcategories flex sm:block justify-center">
             <h2><button class="m-2 manage-categories-btn bg-[#007bff] py-2 px-2 rounded-md hover:bg-[#007bff]/[0.40] duration-300 text-white" onclick="openExpenseCategoriesPage()">Manage Expense Categories</button></h2>
         </div>
@@ -266,6 +267,41 @@
         // Call the function to display the line graph on page load
         displayMonthlySpendingTrends();
     </script>
+
+    <footer class="pt-4 bg-[#004d6b] border-t-2 mb-0 text-white">
+        <div class=" pt-4 ">
+            <div class="">
+                <div class="block sm:flex justify-around">
+                    <div class="flex justify-center" >
+                        <img src="assets/icon.png" width="100px">
+                    </div>
+                    <nav >
+                        <ul class="mt-0 sm:mt-[25px] flex justify-around">                        
+                            <li class="p-2"><a href=#>Home</a></li>
+                            <li class="p-2"><a href=#>About</a></li>
+                            <li class="p-2"><a href=#>Contact</a></li>
+                            <li class="p-2"><a href=#>Privacy Policy</a></li>
+                        </ul>
+                    </nav>
+                    <div>
+                            <p class="text-center p-2">Contact Us:</p>
+                            <p class="text-center p-2">Email: anuragdaksh77777@gmail.com</p>
+                    </div>
+                    <div class="mt-0 sm:mt-[25px] flex justify-around">
+                        <a class="p-2" href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a class="p-2" href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a class="p-2" href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a class="p-2" href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="mb-0 flex justify-center text-white p-2">
+                    <p>&copy; 2023 Expense Tracker. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+
 </body>
 
 </html>
