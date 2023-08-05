@@ -11,7 +11,7 @@ Web-based Expense Tracker: Develop a web application that allows users to track 
 - go to http://localhost:3000
 
 ## For Docker
-- docker build -t myapp
+- docker build -t myapp .
 - docker run -d -p 5000:3000 myapp
 - go to http://localhost:5000
 
