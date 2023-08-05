@@ -1,0 +1,60 @@
+<style>
+    /* Customize the appearance of the toggle */
+    .toggle-container {
+        display: inline-block;
+        width: 40px;
+        height: 20px;
+        border-radius: 20px;
+        background-color: #ccc;
+        position: relative;
+    }
+
+    .toggle-switch {
+        position: absolute;
+        top: 1px;
+        left: 1px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+    }
+
+    .toggle-checkbox {
+        display: none;
+    }
+
+    /* Change the appearance of the toggle when checked */
+    .toggle-checkbox:checked + .toggle-container .toggle-switch {
+        transform: translateX(20px);
+    }
+</style>
+
+<footer style="background-color: #f2f2f2; padding: 20px; text-align: center;">
+    <div style="font-size: 16px; color: #666;">BUDGETAID &copy; 2023</div>
+    <div style="margin-top: 10px;">
+        <a href="https://github.com/anuragdaksh7/web-based-expense-tracker" target="_blank" style="text-decoration: none; color: #007bff; margin-right: 10px;">
+            <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="logout.php" style="text-decoration: none; color: #007bff;">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+        <label class="toggle-container" style="margin-left: 20px;">
+            <input type="checkbox" class="toggle-checkbox" id="themeToggle" onchange="toggleTheme()" />
+            <span class="toggle-switch"></span>
+            Site Theme
+        </label>
+    </div>
+</footer>
+
+<script>
+    function toggleTheme() {
+        const body = document.body;
+        if (body.classList.contains("dark-mode")) {
+            body.classList.remove("dark-mode");
+        } else {
+            body.classList.add("dark-mode");
+        }
+    }
+</script>
