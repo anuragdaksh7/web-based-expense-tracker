@@ -14,6 +14,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(express.static('assets'));
+app.use(express.static("node_modules/flowbite/dist"));
 app.use(express.static('dist'));
 
 function hash(string) {
@@ -148,4 +149,15 @@ app.get("/logout", auth, async (req, res) => {
 
 app.get("/health-check-001", (req, res) => {
     res.status(200);
+});
+
+app.get("/addexp", auth, (req,res) => {
+    fs.readFile('addExpense.html', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(404)
+            return;
+        }
+        res.send(data).status(200);
+    });
 });
