@@ -29,9 +29,10 @@ app.get("/", (req, res) => {
     fs.readFile('index.html', 'utf8', (err, data) => {
         if (err) {
             console.error(err);
+            res.status(404)
             return;
         }
-        res.send(data);
+        res.send(data).status(200);
     });
 });
 
@@ -40,9 +41,10 @@ app.get("/login", (req,res) => {
     fs.readFile('login.html', 'utf8', (err, data) => {
         if (err) {
             console.error(err);
+            res.status(404)
             return;
         }
-        res.send(data);
+        res.send(data).status(200);
     });
 });
 

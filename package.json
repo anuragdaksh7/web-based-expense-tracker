@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/anuragdaksh7/web-based-expense-tracker#readme",
   "dependencies": {
+    "axios": "^1.4.0",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "dependencies": "^0.0.1",
