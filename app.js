@@ -6,6 +6,7 @@ const fs = require('fs');
 const PORT = process.env.PORT;
 const db = require("./db.js");
 const Register = require("./register.js");
+const userCache = require("./expenseDB.js");
 const cookieParser = require("cookie-parser");
 const auth = require("./auth.js");
 
@@ -79,7 +80,31 @@ app.post("/signup", async (req, res) =>{
                 httpOnly: true
             }
         );
-
+        console.log(userCache);
+        const u = new userCache({
+            userEmail: req.body.email,
+            Expenses: [{
+                date: new Date(),
+                amount: 0,
+                from: "a",
+                to: "a",
+                category: "Bills",
+                note: "a"
+            }],
+            categories: [
+                {category: "Bills"},
+                {category: "Food"},
+                {category: "Groceries"},
+                {category: "Games"},
+                {category: "Entertainment"},
+                {category: "Sport"},
+                {category: "Shopping"},
+                {category: "Education"},
+                {category: "Taxes"},
+                {category: "Travel"},
+                {category: "Subscriptions"}
+            ]
+        });u.save();
         const registered = await register.save();
         res.status(201).redirect("/home");
 
@@ -160,4 +185,20 @@ app.get("/addexp", auth, (req,res) => {
         }
         res.send(data).status(200);
     });
+});
+
+app.get("/categoriesUser", auth, async (req, res) => {
+    // console.log(req.query);
+    const email = req.user.email;
+    // const category = req.query.category;
+    // const s = await getRes(cty);
+    // res.status(200).json(s);
+    var category = await userCache.findOne({userEmail: email});
+    category = category.categories;
+    // console.log(category);
+    var ar = Array();
+    for (let key in category) {
+        ar.push(category[key]["category"]);
+    }
+    res.json (ar);
 });
