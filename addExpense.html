@@ -23,6 +23,30 @@
 </head>
 
 <body class=" bg-white">
+    <script defer>
+        // const currentURL = window.location.href;
+        // console.log(currentURL);
+        const URL = "/categoriesUser";
+        // fetchWeather: function (city){
+		// fetch('http://localhost:5000/info?q='+city)
+		// .then((response) => response.json())
+		// .then((data) => this.displayWeather(data));
+        // }
+        
+
+        async function fetchCategories(){
+            var res = await fetch(URL);
+            var data = await res.json()
+            // return data
+            var ele = document.getElementById("dropdownBox");
+            for (let i = 0; i< data.length; i++){
+                const tmp = document.createElement("li");
+                tmp.innerHTML = `<a onclick="changeCoontent('${String(data[i])}')" href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">${data[i]}</a>`
+                ele.appendChild(tmp)
+            }
+        }
+        fetchCategories();
+    </script>
     <div class="bg-[#03a9fc]/[0.5] rounded-b-lg">
         <h1 class="rounded-b-lg font-['newFont'] text-5xl py-4 border-b-2  border-black">BUDGETAID</h1>
     </div>
@@ -47,19 +71,19 @@
                         </button>
                         <!-- Dropdown menu -->
                         <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                            <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                            </li>
-                            <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                            </li>
-                            <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
-                            </li>
+                            <ul id="dropdownBox" class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                                <!-- <li>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+                                </li> -->
                             </ul>
                         </div>    
 
@@ -113,6 +137,13 @@
             </div>
         </div>
     </footer>
-    
+    <script>
+        function changeCoontent(i) {
+            
+            var ele = document.getElementById("dropdownDefaultButton");
+            // console.log(i);
+            ele.innerText = i;
+        }
+    </script>
 </body>
 </html>
