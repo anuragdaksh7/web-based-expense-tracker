@@ -1,3 +1,5 @@
+![image](https://github.com/anuragdaksh7/web-based-expense-tracker/assets/84393491/e7acdfa9-40d9-4c9c-afe6-df1283fcf7cf)
+
 # web-based-expense-tracker
 Web-based Expense Tracker: Develop a web application that allows users to track their expenses, set budgets, and generate reports for better financial management .
 
