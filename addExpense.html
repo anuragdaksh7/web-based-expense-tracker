@@ -53,57 +53,50 @@
     <!-- <script src="./node_modules/flowbite/dist/flowbite.min.js"></script> -->
     <script src="/flowbite.min.js"></script>
     <div class="mt-8 flex justify-center pt-4 pb-4 px-4 sm:px-4">
+        
         <div class="border-2 w-full sm:w-2/3 border-black p-8 rounded-lg shadow-[0_0_30px_-5px_rgba(0,0,0,0.3)] ">
             <div>
                 <h1 class="text-3xl pt-4 border-black font-semibold p-1 border-b-2 mx-2">Enter New Expense</h1>
             </div>
-            <div class="p-1 mx-2 block sm:flex justify-around mt-6">
-                <div>
+            <form action="/recordExpense" method="post"></form>
+                <div class="p-1 mx-2 block sm:flex justify-around mt-6">
                     <div>
-                        <p class="text-lg font-semibold pb-2">Enter Date</p>
-                        <input class="outline-none border-b-2 pb-2 mb-2" type="date" name="date" id="">
-                        </div>
-                    <div>
-                        <p class="text-lg font-semibold pb-2">Choose Category</p>
-                        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown button <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                        </svg>
-                        </button>
-                        <!-- Dropdown menu -->
-                        <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                            <ul id="dropdownBox" class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                                <!-- <li>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
-                                </li> -->
-                            </ul>
-                        </div>    
+                        <div>
+                            <p class="text-lg font-semibold pb-2">Enter Date</p>
+                            <input class="outline-none border-b-2 pb-2 mb-2" type="date" name="date" id="date">
+                            </div>
+                        <div>
+                            <p class="text-lg font-semibold pb-2">Choose Category</p>
+                            <button name="dropdownnn" id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown button <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                <ul id="dropdownBox" class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                                    
+                                </ul>
+                            </div>    
 
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <p class="text-lg font-semibold pb-2">Enter Amount</p>
-                        <input class="outline-none border-b-2 mb-2 pb-2 ps-2" type="number" name="amount" id="" placeholder="amount">
-                    </div>
-                    <div>
-                        <p class="text-lg font-semibold pb-2">Notes</p>
-                        <input class="outline-none border-b-2 mb-2 pb-2 ps-2" type="text" name="notes" id="" placeholder="note">
                         </div>
+                    </div>
+                    <div>
+                        <div>
+                            <p class="text-lg font-semibold pb-2">Enter Amount</p>
+                            <input class="outline-none border-b-2 mb-2 pb-2 ps-2" type="number" name="amount" id="amount" placeholder="amount">
+                        </div>
+                        <div>
+                            <p class="text-lg font-semibold pb-2">Notes</p>
+                            <input class="outline-none border-b-2 mb-2 pb-2 ps-2" type="text" name="notes" id="notee" placeholder="note">
+                            </div>
+                    </div>
                 </div>
-            </div>
-            <div class="flex justify-center mt-4">
-                <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Save Expense</button>
-            </div>
+                <div class="flex justify-center mt-4">
+                    <button id="post-btn" name="submit" type="submit" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Save Expense</button>
+                </div>
+            </form>
         </div>
+        
     </div>
     <footer class="mb-0 sm:absolute sm:bottom-0  bg-[#004d6b] border-t-2 w-full  text-white">
         <div class=" pt-4 ">
@@ -144,6 +137,30 @@
             // console.log(i);
             ele.innerText = i;
         }
+        const button = document.getElementById('post-btn');
+
+        button.addEventListener('click', async _ => {
+            // console.log(3232);
+        try {     
+            const response = await fetch('/recordExpense', {
+            method: 'POST',
+            body: JSON.stringify({
+                date: document.getElementById("date").value,
+                amount: document.getElementById("amount").value,
+                category: document.getElementById("dropdownDefaultButton").innerText,
+                note: document.getElementById("notee").value
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+            })
+            alert("Expense Added");
+            console.log('Completed!', response.status);
+            
+        } catch(err) {
+            console.error(`Error: ${err}`);
+        }
+        });
     </script>
 </body>
 </html>

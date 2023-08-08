@@ -84,12 +84,12 @@ app.post("/signup", async (req, res) =>{
         const u = new userCache({
             userEmail: req.body.email,
             Expenses: [{
-                date: new Date(),
-                amount: 0,
-                from: "a",
-                to: "a",
-                category: "Bills",
-                note: "a"
+                expense : {
+                    date: new Date(),
+                    amount: 0,
+                    category: "Bills",
+                    note: "a"
+                }
             }],
             categories: [
                 {category: "Bills"},
@@ -187,6 +187,8 @@ app.get("/addexp", auth, (req,res) => {
     });
 });
 
+
+
 app.get("/categoriesUser", auth, async (req, res) => {
     // console.log(req.query);
     const email = req.user.email;
@@ -200,5 +202,24 @@ app.get("/categoriesUser", auth, async (req, res) => {
     for (let key in category) {
         ar.push(category[key]["category"]);
     }
-    res.json (ar);
+    res.json(ar);
 });
+
+app.post("/recordExpense", auth,async (req, res) => {
+    console.log(req.body,req.user.email);
+    // { date: '2023-08-01', amount: '234', category: 'Food', note: 'tjhg' } t@t.t
+    const expense = {
+        date: new Date(req.body.date),
+        amount: Number(req.body.amount),
+        category: req.body.category,
+        note: req.body.note
+    };
+    // console.log("\n\n\n"+typeof(expense.amount)+"\n\n\n");
+    var person = await userCache.findOne({userEmail: req.user.email});
+    // person.Expenses = person.Expenses.push(expense);
+    const transaction = await person.addUserExpense(expense.date,expense.amount,expense.category,expense.note);
+    
+    // console.log(person.Expenses);
+    res.status(200).send("1");
+});
+
