@@ -20,7 +20,7 @@ async function addUser(Email, username, password){
     let collection = db.collection("web-app");
     let response = await collection.find({email:Email}).toArray();
     if (response.length > 0) return "USER ALREADY EXISTS!";
-    else await collection.insertOne({ email: Email, user: username, pass: password  });
+    else await collection.insertOne({ email: Email, user: username, pass: password  }); //maybe use bcrypt here like pass: hashedpassword
     return "USER CREATED";
 }
 
