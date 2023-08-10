@@ -33,8 +33,8 @@
                 <h1 class="text-3xl pt-4 border-black font-semibold p-1 border-b-2 mx-2">Monthly Expenses Overview</h1>
 
                 <div class="mt-1 p-2">
-                    <p class="text-lg">Total Spending: <span name="totalSpending">$123</span></p>
-                    <p class="text-lg">Average Spending: <span name="avgSpending">$23</span></p>
+                    <p id="totalSpending" class="text-lg">Total Spending: <span name="totalSpending">$123</span></p>
+                    <p id="averageSpending" class="text-lg">Average Spending: <span name="avgSpending">$23</span></p>
                     <div class=" border-0 shadow-[0_0_30px_-5px_rgba(0,0,0,0.3)] bg-cyan-300/[0.20]  rounded-lg width-1/2 border-black p-2 mt-2">
                         <h1 class="text-xl font-semibold mb-2">Budget Progress</h1>
                         <!-- <progress class="" value="123" max="345">212%</progress> -->
@@ -50,7 +50,7 @@
     </div>
     <div class="m-4 p-4 display-flex justify-center">
         <div class="px-4 pb-2 shadow-[0_0_30px_-5px_rgba(0,0,0,0.3)] border-0 rounded-lg border-black bg-cyan-300/[0.30]">
-            <h1 class="text-lg pt-4 border-black font-semibold p-1 mx-2">Recent Transactions</h1>
+            <h1 class="text-lg pt-4 border-black font-semibold p-1 mx-2">Recently added Transactions</h1>
             <table class="shadow-sm font-[Poppins] border-1 border-cyan-200 w-full mb-4" id="expenseTable">
                 <thead class="text-white">
                     <tr class=" rounded-t-lg">
@@ -61,19 +61,19 @@
                 </thead>
                 <tbody class="text-cyan-900 text-center">
                     <tr class="bg-cyan-200/[0.70] hover:bg-cyan-100 hover:scale-105 cursor-pointer duration-300">
-                        <td class="py-2 px-1">2023-08-01</td>
-                        <td class="py-2 px-1">$100.50</td>
-                        <td class="py-2 px-1">A</td>
+                        <td id="d1" class="py-2 px-1">2023-08-01</td>
+                        <td id="c1" class="py-2 px-1">$100.50</td>
+                        <td id="cat1" class="py-2 px-1">A</td>
                     </tr>
                     <tr class="bg-cyan-300/[0.70] hover:bg-cyan-100 hover:scale-105 cursor-pointer duration-300">
-                        <td class="py-2 px-1">2023-08-01</td>
-                        <td class="py-2 px-1">$100.50</td>
-                        <td class="py-2 px-1">B</td>
+                        <td id="d2" class="py-2 px-1">2023-08-01</td>
+                        <td id="c2" class="py-2 px-1">$100.50</td>
+                        <td id="cat2" class="py-2 px-1">B</td>
                     </tr>
                     <tr class="bg-cyan-400/[0.70] hover:bg-cyan-100 hover:scale-105 cursor-pointer duration-300">
-                        <td class="py-2 px-1">2023-08-01</td>
-                        <td class="py-2 px-1">$100.50</td>
-                        <td class="py-2 px-1">C</td>
+                        <td id="d3" class="py-2 px-1">2023-08-01</td>
+                        <td id="c3" class="py-2 px-1">$100.50</td>
+                        <td id="cat3" class="py-2 px-1">C</td>
                     </tr>
                 </tbody>
             </table>
@@ -264,8 +264,108 @@
             });
         }
 
+
+        function updateRecentTransactionTable(a){
+            // console.log(a.Expenses);
+            const length = a.Expenses.length;
+            // for (let i = 0; i< 3 && (length-i-1)>=0; i++){
+            //     console.log(a.Expenses[length-i-1]);
+            // }
+            if (length-1>=0){
+                var b = document.getElementById("d1");
+                b.innerText = a.Expenses[length-1].expense.date.slice(0,10);
+            }
+            if (length-2>=0){
+                var b = document.getElementById("d2");
+                b.innerText = a.Expenses[length-2].expense.date.slice(0,10);
+            }
+            if (length-3>=0){
+                var b = document.getElementById("d3");
+                b.innerText = a.Expenses[length-3].expense.date.slice(0,10);
+            }
+            if (length-1>=0){
+                var b = document.getElementById("c1");
+                b.innerText = a.Expenses[length-1].expense.amount;
+            }
+            if (length-2>=0){
+                var b = document.getElementById("c2");
+                b.innerText = a.Expenses[length-2].expense.amount;
+            }
+            if (length-3>=0){
+                var b = document.getElementById("c3");
+                b.innerText = a.Expenses[length-3].expense.amount;
+            }
+            if (length-1>=0){
+                var b = document.getElementById("cat1");
+                b.innerText = a.Expenses[length-1].expense.category;
+            }
+            if (length-2>=0){
+                var b = document.getElementById("cat2");
+                b.innerText = a.Expenses[length-2].expense.category;
+            }
+            if (length-3>=0){
+                var b = document.getElementById("cat3");
+                b.innerText = a.Expenses[length-3].expense.category;
+            }
+        }
+
+        function updateMonthlyOverview(a){
+            var month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+            const d = new Date();
+            var date = d.getFullYear()+"-"+String(Number(d.getMonth())+1).padStart(2,"0")+"-";
+
+            console.log(date)
+
+            var ar = Array();
+            var totalSpending = 0;
+            var totalSpendingForAverage = 0;
+            var monthCounter = 0;
+            var object = Object();
+            const length = a.Expenses.length;
+            for (let i = 0; i< length; i++){
+                const datePart = a.Expenses[i].expense.date.slice(0,8);
+                if (object[datePart]){
+                    totalSpendingForAverage += Number(a.Expenses[i].expense.amount);
+                    // object[datePart] += Number(a.Expenses[i].expense.amount);
+                } else {
+                    monthCounter += 1;
+                    object[datePart] = 1;
+                    totalSpendingForAverage += Number(a.Expenses[i].expense.amount);
+                }
+                if (datePart == date){
+                    totalSpending += Number(a.Expenses[i].expense.amount);
+                }
+            }
+            console.log(object, totalSpendingForAverage);
+            document.getElementById("averageSpending").innerText = "Average Spending: "+ totalSpendingForAverage/monthCounter;
+            document.getElementById("totalSpending").innerText = "Total Spending: "+ totalSpending;
+        }
+
         // Call the function to display the line graph on page load
         displayMonthlySpendingTrends();
+        async function getUserHome(){
+            // console.log(1);
+            try {     
+                const response = await fetch('/setuphome', {
+                method: 'POST',
+                body: JSON.stringify({
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+
+                })
+                const a = await response.json();
+                console.log('Completed!', a);
+                updateRecentTransactionTable(a);
+                updateMonthlyOverview(a);
+            } catch(err) {
+                console.log(`Error: ${err}`);
+            }
+        }
+        getUserHome();
+
+
     </script>
 
     <footer class="pt-4 bg-[#004d6b] border-t-2 mb-0 text-white">
