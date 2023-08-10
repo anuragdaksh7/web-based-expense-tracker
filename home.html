@@ -181,7 +181,7 @@
         ];
 
         // Function to display pie chart for expense categories
-        function displayExpenseCategoriesChart() {
+        function displayExpenseCategoriesChart(expenseCategoriesData) {
             const labels = expenseCategoriesData.map(item => item.category);
             const data = expenseCategoriesData.map(item => item.amount);
 
@@ -213,21 +213,13 @@
         }
 
         // Call the function to display the pie chart on page load
-        displayExpenseCategoriesChart();
+        // displayExpenseCategoriesChart();
 
         // Example monthly spending data (replace this with your actual data)
-        const monthlySpendingData = [
-            { month: 'January', amount: 300 },
-            { month: 'February', amount: 400 },
-            { month: 'March', amount: 200 },
-            { month: 'April', amount: 250 },
-            { month: 'May', amount: 350 },
-            { month: 'June', amount: 500 },
-            // Add more monthly spending data here
-        ];
+        
 
         // Function to display line graph for monthly spending trends
-        function displayMonthlySpendingTrends() {
+        function displayMonthlySpendingTrends(monthlySpendingData) {
             const labels = monthlySpendingData.map(item => item.month);
             const data = monthlySpendingData.map(item => item.amount);
 
@@ -336,13 +328,58 @@
                     totalSpending += Number(a.Expenses[i].expense.amount);
                 }
             }
-            console.log(object, totalSpendingForAverage);
-            document.getElementById("averageSpending").innerText = "Average Spending: "+ totalSpendingForAverage/monthCounter;
+            var avg = totalSpendingForAverage/monthCounter;
+            avg = Math.round(avg * 100) / 100;
+            document.getElementById("averageSpending").innerText = "Average Spending: "+ (avg);
             document.getElementById("totalSpending").innerText = "Total Spending: "+ totalSpending;
         }
 
+
+        function updateMonthlyPieChart(a){
+            const d = new Date();
+            var date = d.getFullYear()+"-"+String(Number(d.getMonth())+1).padStart(2,"0")+"-";
+            console.log(date)
+            const length = a.Expenses.length;
+            
+            var expenseCategoriesData = [];
+
+            for (let i = 0; i< length; i++){
+                const datePart = a.Expenses[i].expense.date.slice(0,8);
+                if (datePart == date){
+                    expenseCategoriesData.push({category: a.Expenses[i].expense.category, amount: a.Expenses[i].expense.amount})
+                }
+            }
+            const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+            var object = Object();
+            var date = String(d.getFullYear());
+            for (let i = 0; i< length; i++){
+                const datePart = a.Expenses[i].expense.date.slice(0,4);
+                if (datePart == date){
+                    var mnth = Number(a.Expenses[i].expense.date.slice(5,7))-1;
+                    // console.log(a.Expenses[i].expense.date.slice(5,7));
+                    if (object[mnth]){
+                        object[mnth] += Number(a.Expenses[i].expense.amount);
+                        // object[datePart] += Number(a.Expenses[i].expense.amount);
+                    } else {
+                        object[mnth] = Number(a.Expenses[i].expense.amount);
+                        // totalSpendingForAverage += Number(a.Expenses[i].expense.amount);
+                    }
+                }
+            }
+            console.log(object);
+            displayExpenseCategoriesChart(expenseCategoriesData);
+            var something = [];
+            for (const key in object){
+                console.log(object[key]);
+                something.push({month: month[key], amount: object[key]});
+            }
+            console.log(something);
+            displayMonthlySpendingTrends(something);
+        }
+
         // Call the function to display the line graph on page load
-        displayMonthlySpendingTrends();
+        // displayMonthlySpendingTrends();
         async function getUserHome(){
             // console.log(1);
             try {     
@@ -359,6 +396,7 @@
                 console.log('Completed!', a);
                 updateRecentTransactionTable(a);
                 updateMonthlyOverview(a);
+                updateMonthlyPieChart(a);
             } catch(err) {
                 console.log(`Error: ${err}`);
             }
