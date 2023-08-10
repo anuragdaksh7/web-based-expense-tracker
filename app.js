@@ -206,7 +206,7 @@ app.get("/categoriesUser", auth, async (req, res) => {
 });
 
 app.post("/recordExpense", auth,async (req, res) => {
-    console.log(req.body,req.user.email);
+    // console.log(req.body,req.user.email);
     // { date: '2023-08-01', amount: '234', category: 'Food', note: 'tjhg' } t@t.t
     const expense = {
         date: new Date(req.body.date),
@@ -223,3 +223,9 @@ app.post("/recordExpense", auth,async (req, res) => {
     res.status(200).send("1");
 });
 
+app.post("/setuphome", auth, async (req, res) => {
+    // console.log(req.user);
+    const person = await userCache.findOne({userEmail: req.user.email});
+    // console.log(person);
+    res.json(person);
+});
