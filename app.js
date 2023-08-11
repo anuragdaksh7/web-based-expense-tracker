@@ -229,3 +229,20 @@ app.post("/setuphome", auth, async (req, res) => {
     // console.log(person);
     res.json(person);
 });
+
+app.get("/allexpenses", auth, (req, res)=>{
+    fs.readFile('allExp.html', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(404)
+            return;
+        }
+        res.send(data).status(200);
+    });
+});
+
+app.post("/getallexps", auth, async (req, res)=>{
+    const user = req.user.email;
+    const data = await userCache.findOne({userEmail: user});
+    res.json(data.Expenses);
+});
