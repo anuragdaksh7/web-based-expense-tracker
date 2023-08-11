@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anuragdaksh7/web-based-expense-tracker.git"
+    "url": "https://github.com/anuragdaksh7/web-based-expense-tracker.git"
   },
   "author": "anuragdaksh7",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/anuragdaksh7/web-based-expense-tracker/issues"
   },
-  "homepage": "https://github.com/anuragdaksh7/web-based-expense-tracker#readme",
+  "homepage": "https://web-expense-tracker.onrender.com/",
   "dependencies": {
     "axios": "^1.4.0",
     "body-parser": "^1.20.2",
