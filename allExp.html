@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="/icon.png">
+    <style>
+        @font-face {
+            font-family: newFont;
+            src: url(/MontserratAlt1-Light.ttf);
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;600&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="/output.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+
+<body class=" bg-cyan-100">
+    <div class="bg-[#03a9fc]/[0.5] rounded-b-lg">
+        <h1 class="rounded-b-lg font-['newFont'] text-5xl py-4 border-b-2  border-black">BUDGETAID</h1>
+    </div>
+
+    <div>
+        <div>
+            <table class="shadow-sm font-[Poppins] border-1 border-cyan-200 w-full mb-4" id="expenseTable">
+                <thead class="text-white">
+                    <tr class=" rounded-t-lg">
+                        <th class="py-2 bg-cyan-700/[0.70]">Date</th>
+                        <th class="py-2 bg-cyan-700/[0.70]">Amount</th>
+                        <th class="py-2 bg-cyan-700/[0.70]">Category</th>
+                        <th class="py-2 bg-cyan-700/[0.70]">Note</th>
+                    </tr>
+                </thead>
+                <tbody id="tablebody" class="text-cyan-900 text-center">
+                    <tr class="bg-cyan-200/[0.70] hover:bg-cyan-100 hover:scale-105 cursor-pointer duration-300">
+                        <td id="d1" class="py-2 px-1">2023-08-01</td>
+                        <td id="c1" class="py-2 px-1">$100.50</td>
+                        <td id="cat1" class="py-2 px-1">A</td>
+                        <td id="cat1" class="py-2 px-1">A</td>
+                    </tr>
+                    <tr class="bg-cyan-300/[0.70] hover:bg-cyan-100 hover:scale-105 cursor-pointer duration-300">
+                        <td id="d2" class="py-2 px-1">2023-08-01</td>
+                        <td id="c2" class="py-2 px-1">$100.50</td>
+                        <td id="cat2" class="py-2 px-1">B</td>
+                        <td id="cat1" class="py-2 px-1">A</td>
+                    </tr>
+                    <tr class="bg-cyan-400/[0.70] hover:bg-cyan-100 hover:scale-105 cursor-pointer duration-300">
+                        <td id="d3" class="py-2 px-1">2023-08-01</td>
+                        <td id="c3" class="py-2 px-1">$100.50</td>
+                        <td id="cat3" class="py-2 px-1">C</td>
+                        <td id="cat1" class="py-2 px-1">A</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        function updateTables(ar){
+            console.log(2132);
+            var tbdy = document.getElementById("tablebody");
+            tbdy.innerHTML = '';
+            for (let i = 0; i< ar.length; i++){
+                var tr = document.createElement("tr");
+                tr.className = "bg-cyan-200/[0.70] hover:bg-cyan-100 hover:scale-105 cursor-pointer duration-300";
+                tr.innerHTML = `<td id="d1" class="py-2 px-1">${ar[i]["date"]}</td>
+                        <td id="c1" class="py-2 px-1">$${ar[i]["amount"]}</td>
+                        <td id="cat1" class="py-2 px-1">${ar[i]["category"]}</td>
+                        <td id="cat1" class="py-2 px-1">${ar[i]["note"]}</td>`;
+                tbdy.appendChild(tr);
+            }
+            
+        }
+        async function getUserHome(){
+            // console.log(1);
+            try {     
+                const response = await fetch('/getallexps', {
+                method: 'POST',
+                body: JSON.stringify({
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+
+                })
+                const a = await response.json();
+                console.log('Completed!', a);
+                var ar = [];
+                
+                for (let i = 0; i< a.length; i++){
+                    var obj = new Object();
+                    // console.log(a[length-i-1])
+                    obj["date"] = a[a.length-i-1].expense.date.slice(0,10);
+                    obj["amount"] = a[a.length-i-1].expense.amount;
+                    obj["category"] = a[a.length-i-1].expense.category;
+                    obj["note"] = a[a.length-i-1].expense.note;
+                    ar.push(obj);
+                }
+                updateTables(ar);
+            } catch(err) {
+                console.log(`Error: ${err}`);
+            }
+        }
+        getUserHome();
+    </script>
+</body>
+</html>
