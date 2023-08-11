@@ -80,7 +80,7 @@ app.post("/signup", async (req, res) =>{
                 httpOnly: true
             }
         );
-        console.log(userCache);
+        // console.log(userCache);
         const u = new userCache({
             userEmail: req.body.email,
             Expenses: [{
@@ -124,7 +124,7 @@ app.post("/login", async(req, res) => {
 
         const userEmail = await Register.findOne({email: email});
         const token = await userEmail.generateAuthToken();
-        console.log("token: "+ token);
+        // console.log("token: "+ token);
 
         res.cookie(
             "jwt",
