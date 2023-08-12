@@ -28,13 +28,13 @@ Web-based Expense Tracker: Develop a web application that allows users to track 
 
   Sign-up and sign-in ✔️
   
-  Can add new expense
+  Can add new expense ✔️
   
-  Catogrise the expense according to the type
+  Catogrise the expense according to the type ✔️
   
-  Delete the expense 
+  Delete the expense  ✔️
   
-  View virtual representation of the expenses via graphs (like pie chart)
+  View virtual representation of the expenses via graphs (like pie chart) ✔️
   
 
 ### V-1.0.1
