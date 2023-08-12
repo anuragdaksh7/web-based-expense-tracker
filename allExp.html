@@ -68,13 +68,22 @@
             tbdy.innerHTML = '';
             for (let i = 0; i< ar.length; i++){
                 var tr = document.createElement("tr");
-                tr.className = "bg-cyan-200/[0.70] hover:bg-cyan-100 hover:scale-105 cursor-pointer duration-300";
+                tr.id = ar[i]["_id"];
+                tr.className = "bg-cyan-200/[0.70] hover:bg-cyan-100 cursor-pointer duration-300";
                 tr.innerHTML = `<td id="d1" class="py-2 px-1">${ar[i]["date"]}</td>
                         <td id="c1" class="py-2 px-1">$${ar[i]["amount"]}</td>
                         <td id="cat1" class="py-2 px-1">${ar[i]["category"]}</td>
-                        <td id="cat1" class="py-2 px-1">${ar[i]["note"]}</td>`;
+                        <td id="cat1" class="py-2 px-1">${ar[i]["note"]}</td>
+                        <td class = "p-4" onclick="delReq('${ar[i]._id}');location.reload()">Delete</td>`;
                 tbdy.appendChild(tr);
             }
+            
+        }
+        async function delReq(id){
+            // console.log(238949);
+            const res = await fetch("/deleteExp/"+id, {
+                method: 'DELETE'
+            });
             
         }
         async function getUserHome(){
@@ -100,6 +109,7 @@
                     obj["amount"] = a[a.length-i-1].expense.amount;
                     obj["category"] = a[a.length-i-1].expense.category;
                     obj["note"] = a[a.length-i-1].expense.note;
+                    obj["_id"] = a[a.length-i-1]._id;
                     ar.push(obj);
                 }
                 updateTables(ar);

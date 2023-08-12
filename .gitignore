@@ -4,3 +4,4 @@ input.css
 tailwind.config.js
 test.html
 .env
+requests.rest

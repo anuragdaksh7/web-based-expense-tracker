@@ -246,3 +246,25 @@ app.post("/getallexps", auth, async (req, res)=>{
     const data = await userCache.findOne({userEmail: user});
     res.json(data.Expenses);
 });
+
+app.delete("/deleteExp/:id", auth, async (req, res) => {
+    // console.log(434);
+    const user = req.user.email;
+    // console.log(user);
+    var data = await userCache.findOne({userEmail: user});
+    // console.log(data);
+    const exps = data.Expenses;
+    var len = exps.length;
+    var newexps = []
+    for (let i = 0; i< len; i++){
+        if (req.params.id != (exps[i]["_id"]).toString()) {
+            newexps.push(exps[i]);
+        }
+    }
+    data.Expenses = newexps;
+    data.save();
+    // console.log(data)
+    res.redirect("/allexpenses");
+
+    // res.status(200);
+});
