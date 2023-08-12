@@ -34,12 +34,12 @@ Web-based Expense Tracker: Develop a web application that allows users to track 
   
   Delete the expense 
   
-  Modify the expense
+  View virtual representation of the expenses via graphs (like pie chart)
   
 
 ### V-1.0.1
-
-  View virtual representation of the expenses via graphs (like pie chart)
+  
+  Modify the expense
   
   Support for multiple currencies
 
