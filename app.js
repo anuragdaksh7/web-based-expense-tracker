@@ -268,3 +268,25 @@ app.delete("/deleteExp/:id", auth, async (req, res) => {
 
     // res.status(200);
 });
+
+app.post("/addcategory", auth, async (req, res)=>{
+    console.log(23);
+    var user = await userCache.findOne({userEmail: req.user.email});
+    const newCategory = req.body.category;
+    // console.log(user.categories);
+    user.categories = user.categories.concat({category: newCategory});
+    user.save();
+    // console.log(user);
+    res.send("category added").status(200);
+});
+
+app.get("/manageExpenseCategories", auth, (req, res) =>{
+    fs.readFile('manage.html', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(404)
+            return;
+        }
+        res.send(data).status(200);
+    });
+});

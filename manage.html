@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="/icon.png">
+    <style>
+        @font-face {
+            font-family: newFont;
+            src: url(/MontserratAlt1-Light.ttf);
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;600&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="/output.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+
+<body class=" bg-white">
+    <div class="bg-[#03a9fc]/[0.5] rounded-b-lg">
+        <h1 class="rounded-b-lg font-['newFont'] text-5xl py-4 border-b-2  border-black">BUDGETAID</h1>
+    </div>
+    <form action="/addcategory" class="flex justify-center mt-[10%]" method="post">
+        <div class="flex  bg-blue-300 p-4 py-6 rounded-lg">
+            <input class="mx-3 rounded-lg border-b-2 w-2/3 ps-2 outline-none" type="text" name="category" placeholder="enter a category to add">
+            <button class="mx-3 rounded-lg border-2  p-2 bg-blue-600 text-white">Submit</button>
+        </div>
+    </form>
+</body>
+</html>
