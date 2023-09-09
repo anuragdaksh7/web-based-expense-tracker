@@ -5,7 +5,7 @@ Web-based Expense Tracker: A web application that allows users to track their ex
 
 ## [DEPLOYMENT](https://web-expense-tracker.onrender.com/)
 
-## Steps to install
+## Steps to install 
 - git clone https://github.com/anuragdaksh7/web-based-expense-tracker.git
 - cd web-based-expense-tracker
 - npm i
